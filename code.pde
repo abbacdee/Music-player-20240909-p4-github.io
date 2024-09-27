@@ -5,8 +5,10 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 //
+//TEST
+//
 // Global Variabels
-Minim minim
+Minim minim;
 int numberOFSongs = 8; // Able to Autodectect based on pathway
 //
 void setup() 
