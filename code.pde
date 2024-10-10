@@ -59,23 +59,23 @@ void setup()
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
-  // Load Music
-  String musicPathway = "Music/";
+  // Load music
+  String musicPathway = "music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
   String beatYourCompetition = "Beat_Your_Competition";
-  String cycles = "Cycles";
-  String newsroom = "Newsroom";
+  String eureka = "Eureka";
+  String groove = "Groove";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + cycles + mp3FileName;
+  String file = directory + eureka + mp3FileName;
   song[currentSong] = minim.loadFile( file );
   file = directory + beatYourCompetition + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
-  file = directory + cycles + mp3FileName;
+  file = directory + eureka + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
-  file = directory + newsroom + mp3FileName;
+  file = directory + groove + mp3FileName;
   //
   currentSong = 0;
   //
