@@ -13,7 +13,7 @@ int currentSong = numberOfSongs - numberOfSongs;
 
 String musicPath = "../../../../music/";
 String mp3FileName = ".mp3";
-String[] musicIndex = {
+String[] musicNames = {
   "Beat_Your_Competition",
   "Eureka",
   "groove"
@@ -70,15 +70,15 @@ void setup() {
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
 
-  String file = musicPath + musicIndex[1] + mp3FileName;
+  String file = musicPath + musicNames[0] + mp3FileName;
   song[currentSong] = minim.loadFile(file);
-  file = musicPath + musicIndex[1] + mp3FileName;
-  file = musicPath + musicIndex[2] + mp3FileName;
+  file = musicPath + musicNames[1] + mp3FileName;
+  song[currentSong+=1] = minim.loadFile(file);
+  file = musicPath + musicNames[2] + mp3FileName;
+  song[currentSong+=1] = minim.loadFile(file);
 
   // Load Music
-
   song[currentSong].play();
-
 
   if (hour()<=7 || hour()>17 || colorNightMode == true) {
     //nightmode
@@ -125,22 +125,22 @@ void keyPressed() {
     if (song[currentSong].isPlaying()) {
       song[currentSong].pause();
       song[currentSong].rewind();
+      if ( currentSong==numberOfSongs-1 ) {
+        currentSong = 0;
+      } else {
+        currentSong++;
+      }
+      song[currentSong].play();
+    } else {
+      //
+      song[currentSong].rewind();
+      //
+      if ( currentSong==numberOfSongs-1 ) {
+        currentSong = 0;
+      } else {
+        currentSong++;
+      }
+      //end song skip
     }
-    currentSong++;
-    song[currentSong].play();
-  }
-  //end song skip
-
-  //toggle mode
-  if (key == 'M' || key == 'm') {
-    boolean toggle = false;
-    if (toggle == false) {
-      background(0);
-      toggle = true;
-    } else if (toggle == true) {
-      background(180, 0, 0);
-      toggle = false;
-    }
-  }
+  } // End keyPressed
 }
-// End keyPressed
