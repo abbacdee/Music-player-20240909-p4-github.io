@@ -7,7 +7,7 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim;
-int numberOfSongs = 3; //Able to Autodetect based on Pathway
+int numberOfSongs = 8; //Able to Autodetect based on Pathway
 AudioPlayer[] playList = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 AudioMetaData[] playListMetaData = new AudioMetaData[numberOfSongs];
@@ -30,7 +30,7 @@ void setup()
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
   // Load Music
-  String musicPathway = "Music/";
+  String musicPathway = "music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
   String beatYourCompetition = "Beat_Your_Competition";
@@ -38,39 +38,36 @@ void setup()
   String groove = "groove";
   //
   //Add Reading into Array
-  String directory = "../../../" + musicPathway;
+  String directory = "../" + musicPathway;
   //println ( currentSong, directory );
   String file = directory + groove + mp3FileName;
   playList[currentSong] = minim.loadFile( file );
-  //println ( currentSong, file, playList[currentSong] );
   file = directory + beatYourCompetition + mp3FileName;
   playList[currentSong+=1] = minim.loadFile( file );
-  //println ( currentSong, file, playList[currentSong] );
-  file = directory +  mp3FileName;
-  playList[currentSong+=1] = minim.loadFile( file );
-  //println ( currentSong, file, playList[currentSong] );
   file = directory + eureka + mp3FileName;
-  //println ( currentSong, file, playList[currentSong] );
+
   //NOTE: How would this be turned into a FOR Loop, students to finish
   //
   currentSong = 0;
   //
   // NOTE: Lines of code repeating
+  /*
   playListMetaData[currentSong] = playList[currentSong].getMetaData(); //reads song meta 1, like song 1, mimicing array notation
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
-  currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   currentSong++;
+   playListMetaData[currentSong] = playList[currentSong].getMetaData();
+   */
   /* NOTE: Introduce FOR LOOP
    - Known: how many lines of code
    - WHILE is for unknown loop interations
@@ -139,45 +136,27 @@ void setup()
 } //End setup
 //
 void draw() {
-  /*Optical Illusion creating movement
-   - screen goes at front of draw(), repeating setup()
-   */
-  fill(resetDefaultInk);
-  rect( metaDataX1, metaDataY1, metaDataWidth1, metaDataHeight1 );
-  rect( metaDataX2, metaDataY2, metaDataWidth2, metaDataHeight2 );
-  rect( metaDataX3, metaDataY3, metaDataWidth3, metaDataHeight3 );
-  //
-  //Drawing Text: applies to all text
-  textAlign(CENTER, CENTER); //Align X&Y, see Processing.org / Reference
-  //Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
-  ink = purple;
-  fill(ink);
-  size = 47; //Change the number until it fits
-  textFont( titleFont, size );
-  /*Problem: .mp3 does not have the Meta Data Entered
-   - must inspect .mp3 properties / details for information
-   - what if Drag&Drop thus no inspection
-   - metadata=="", then should put something in for the user
-   */
-  String titleCheck = ( playListMetaData[currentSong].title()!="" ) ? "Title Exists": "Title Does not Exist" ; //Careful with "not ="
-  text( titleCheck, metaDataX1, metaDataY1, metaDataWidth1, metaDataHeight1 ); //playListMetaData[currentSong].title()
-  fill(ink);
-  size = 43; //Change the number until it fits
-  textFont( footerFont, size );
-  //int timeRemaining = playListMetaData[currentSong].length()/1000; // Needs Updating
-  int timeRemaining = playListMetaData[currentSong].length()/1000 - playList[currentSong].position()/1000; // Needs Updating
-  String concatTimeRemaining = str ( timeRemaining ) + " | " + str ( playListMetaData[currentSong].length()/1000 ) + " Seconds";
-  text( concatTimeRemaining, metaDataX3, metaDataY3, metaDataWidth3, metaDataHeight3 ); //Note: str(timeRemaining)
-  //NOTE: Students to format Minutes and Seconds
-  //
-  //Repeating Code, different from Static
-  ink = ( randomColour == true ) ? color( random(0, 256), random(256), random(256) ) : purple ; //Ternary Operator
-  //
-  fill(ink);
-  size = 83; //Change the number until it fits
-  textFont( phraseFont, size );
-  text( str ( playList[currentSong].position()/1000 ), metaDataX2, metaDataY2, metaDataWidth2, metaDataHeight2 );
-  //
+  fill(255);
+  // Draw the boxes (already present)
+  rect(metaDataX1, metaDataY1, metaDataWidth1, metaDataHeight1);
+  rect(metaDataX2, metaDataY2, metaDataWidth2, metaDataHeight2);
+  rect(metaDataX3, metaDataY3, metaDataWidth3, metaDataHeight3);
+
+  // Add text to each box
+
+  // Title Box
+  fill(0);
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  text("a", metaDataX1 + metaDataWidth1 / 2, metaDataY1 + metaDataHeight1 / 2);
+
+  // Song Position Box
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  text("what", metaDataX2 + metaDataWidth2 / 2, metaDataY2 + metaDataHeight2 / 2);
+
+  // Time Remaining Box
+  text("goal", metaDataX3 + metaDataWidth3 / 2, metaDataY3 + metaDataHeight3 / 2);
 } //End draw
 //
 void mousePressed() {
